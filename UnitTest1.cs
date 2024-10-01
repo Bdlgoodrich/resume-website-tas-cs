@@ -4,7 +4,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace NUnitTest;
 
-public class Tests
+public class BasicTests
 {
 #pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
     private IWebDriver driver;
