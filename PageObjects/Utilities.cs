@@ -31,7 +31,7 @@ public class Utilities
         alert.Accept();
     }
 
-    public void ScrollToElement(WebElement element)
+    public void ScrollToElement(IWebElement element)
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
         js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
@@ -86,7 +86,7 @@ public class Utilities
     //     return brokenLinks.ToString();
     // }
 
-    public double fetchElementPosition(WebElement element)
+    public double FetchElementPosition(IWebElement element)
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor) driver;
         ScrollToElement(element);

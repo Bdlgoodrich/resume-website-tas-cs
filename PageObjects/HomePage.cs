@@ -18,6 +18,8 @@ public class HomePage : Utilities
     private readonly By aboutEmailLink = By.Id("aboutEmailLink");
     private readonly By aboutLinkedInLink = By.Id("aboutLinkedInLink");
 
+    private readonly By carousel = By.Id("carousel");
+
     public void GoToUrl()
     {
         driver.Url = url;
@@ -31,6 +33,11 @@ public class HomePage : Utilities
     public void ScrollToHero()
     {
         ScrollToByElement(heroTitle);
+    }
+
+    public void ScrollToCarousel()
+    {
+        ScrollToByElement(carousel);
     }
 
 

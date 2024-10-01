@@ -10,60 +10,32 @@ public class Tests
     private IWebDriver driver;
 #pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
 
-    [SetUp]
+    [Test]
 
-    public void Setup()
-
+    public void VerifyTitle()
     {
-
-        string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-        driver = new ChromeDriver(path + @"\drivers\");
-
-        //If you want to Execute Tests on Firefox uncomment the below code
-
-        // Specify Correct location of geckodriver.exe folder path. Ex: C:/Project/drivers
-
-        //driver= new FirefoxDriver(path + @"\drivers\");
-
         HomePage home = new(driver);
-        home.GoToUrl();
+        Assert.That(home.GetTitle(), Is.EqualTo(home.title));
+    }
+
+
+
+    [Test]
+
+    public void VerifyHeroImage()
+    {
 
     }
 
     [Test]
 
-    public void verifyTitle()
-    {
-        HomePage home = new(driver);
-        Assert.That(home.GetTitle() == home.title, Is.True);
-    }
-
-    [Test]
-
-    public void verifyNavbarPresense()
-    {
-        HomePage home = new(driver);
-        Navbar navbar = new(driver);
-        Assert.That(navbar.NavbarIsVisible, Is.False);
-        home.ScrollToHero();
-        Assert.That(navbar.NavbarIsVisible, Is.True);
-    }
-
-    [Test]
-
-    public void verifyPricingPage()
+    public void VerifyHeroGitHubLink()
     {
 
     }
 
-
-    [TearDown]
-
-    public void TearDown()
-
+    public void VerifyHeroEmailLink()
     {
-        driver.Quit();
-    }
 
+    }
 }

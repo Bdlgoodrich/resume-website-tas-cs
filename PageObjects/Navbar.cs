@@ -65,10 +65,10 @@ public class Navbar : Utilities
     {
         IReadOnlyList<IWebElement> navbarLinks = FetchNavbarLinks();
         List<Double> elementLocations = new(navbarLinks.Count);
-        foreach (WebElement link in navbarLinks.Cast<WebElement>())
+        foreach (IWebElement link in navbarLinks)
         {
             ScrollToElement(link);
-            elementLocations.Add(fetchElementPosition(link));
+            elementLocations.Add(FetchElementPosition(link));
         }
         return elementLocations;
     }
@@ -80,7 +80,7 @@ public class Navbar : Utilities
         foreach (WebElement link in navbarLinks.Cast<WebElement>())
         {
             link.Click();
-            elementLocations.Add(fetchElementPosition(link));
+            elementLocations.Add(FetchElementPosition(link));
         }
         return elementLocations;
     }

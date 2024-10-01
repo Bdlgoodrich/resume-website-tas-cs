@@ -5,19 +5,42 @@ namespace Tests
 {
     public class BaseTest
     {
+#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
         protected IWebDriver driver;
+#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
 
-        protected void StartDriver(string browserVersion = "stable")
+        protected IWebDriver StartDriver(string browserVersion = "stable")
         {
             var chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments([
-                "--disable-popup-blocking",
-                "--disable-notifications",
-                "--disable-search-engine-choice-screen",
-                "--disable-features=OptimizationGuideModelDownloading,OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints",
-                "--headless=new"]);
-            driver = new ChromeDriver(chromeOptions);
+                "--disable-popup-blocking"
+                , "--disable-notifications"
+                , "--disable-search-engine-choice-screen"
+                , "--disable-features=OptimizationGuideModelDownloading,OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints"
+                //, "--headless=new"
+                ]);
+            return driver = new ChromeDriver(chromeOptions);
         }
 
+        [SetUp]
+        public void Setup()
+
+        {
+
+            //string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+
+            driver = StartDriver();
+
+            HomePage home = new(driver);
+            home.GoToUrl();
+        }
+
+        [TearDown]
+
+        public void TearDown()
+
+        {
+            driver.Quit();
+        }
     }
 }
