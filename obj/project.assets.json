@@ -381,6 +381,18 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
+      "SeleniumExtras.WaitHelpers/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.WebDriver": "4.0.0-beta2"
+        },
+        "compile": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll": {}
+        }
+      },
       "System.Reflection.Metadata/1.6.0": {
         "type": "package",
         "compile": {
@@ -988,6 +1000,19 @@
         "selenium.webdriver.nuspec"
       ]
     },
+    "SeleniumExtras.WaitHelpers/1.0.2": {
+      "sha512": "de7m30nkZZLkfCncYBdluUpM27AR/Vkk4kiA4HRQbV+fZI3ps4qGIeJCuj8TAMXdMfQik5Rno8xPnFBIod+ebg==",
+      "type": "package",
+      "path": "seleniumextras.waithelpers/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "lib/netstandard2.1/SeleniumExtras.WaitHelpers.dll",
+        "seleniumextras.waithelpers.1.0.2.nupkg.sha512",
+        "seleniumextras.waithelpers.nuspec"
+      ]
+    },
     "System.Reflection.Metadata/1.6.0": {
       "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
       "type": "package",
@@ -1017,23 +1042,24 @@
       "NUnit.Analyzers >= 3.9.0",
       "NUnit3TestAdapter >= 4.5.0",
       "Selenium.WebDriver >= 4.25.0",
+      "SeleniumExtras.WaitHelpers >= 1.0.2",
       "coverlet.collector >= 6.0.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Andi\\.nuget\\packages\\": {}
+    "C:\\Users\\Andie\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj",
       "projectName": "NUnitTest",
-      "projectPath": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj",
-      "packagesPath": "C:\\Users\\Andi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\obj\\",
+      "projectPath": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj",
+      "packagesPath": "C:\\Users\\Andie\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Andi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Andie\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -1082,6 +1108,10 @@
             "target": "Package",
             "version": "[4.25.0, )"
           },
+          "SeleniumExtras.WaitHelpers": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "coverlet.collector": {
             "target": "Package",
             "version": "[6.0.0, )"
@@ -1103,7 +1133,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

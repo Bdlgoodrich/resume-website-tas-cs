@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj": {}
+    "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj": {
+    "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj",
         "projectName": "NUnitTest",
-        "projectPath": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\NUnitTest.csproj",
-        "packagesPath": "C:\\Users\\Andi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andi\\Documents\\Web Development\\CsharpProjects\\NUnitTest\\obj\\",
+        "projectPath": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\NUnitTest.csproj",
+        "packagesPath": "C:\\Users\\Andie\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andie\\resume-website-tas-cs\\resume-website-tas-cs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Andi\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Andie\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[4.25.0, )"
             },
+            "SeleniumExtras.WaitHelpers": {
+              "target": "Package",
+              "version": "[1.0.2, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -84,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
