@@ -11,7 +11,7 @@ public class HomePage : Utilities
 
     //Expected website text content
     readonly String url = "https://resume-website-brianna-goodrichs-projects.vercel.app/";
-    public readonly String title = "Brianna Goodrich Resume";
+    public readonly String title = "Brianna's Resume";
 
     //WebElement By locators
     private readonly By heroTitle = By.TagName("h1");

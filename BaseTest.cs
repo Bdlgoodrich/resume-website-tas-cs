@@ -1,7 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
-namespace Tests
+namespace NUnitTest
 {
     public class BaseTest
     {
@@ -22,25 +22,22 @@ namespace Tests
             return driver = new ChromeDriver(chromeOptions);
         }
 
-        [SetUp]
-        public void Setup()
+        // [SetUp]
+        // public void Setup()
 
-        {
+        // {
+        //     driver = StartDriver();
 
-            //string path = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+        //     HomePage home = new(driver);
+        //     home.GoToUrl();
+        // }
 
-            driver = StartDriver();
+        // [TearDown]
 
-            HomePage home = new(driver);
-            home.GoToUrl();
-        }
+        // public void TearDown()
 
-        [TearDown]
-
-        public void TearDown()
-
-        {
-            driver.Quit();
-        }
+        // {
+        //     driver.Quit();
+        // }
     }
 }
