@@ -10,50 +10,46 @@ public class BasicTests : BaseTest
     private IWebDriver driver;
 #pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
 
-        [SetUp]
-        public void Setup()
+    [SetUp]
+    public void Setup()
+    {
+        driver = StartDriver();
+        HomePage home = new(driver);
+        home.GoToUrl();
+    }
 
-        {
-            driver = StartDriver();
-
-            HomePage home = new(driver);
-            home.GoToUrl();
-        }
-
-        [TearDown]
-
-        public void TearDown()
-
-        {
-            driver.Close();
-            driver.Quit();
-        }
+    [TearDown]
+    public void TearDown()
+    {
+        driver.Quit();
+    }
 
     [Test]
-
     public void VerifyTitle()
     {
         HomePage home = new(driver);
-        Assert.That(home.GetTitle(), Is.EqualTo(home.title));
-    }
-
-
-
-    [Test]
-
-    public void VerifyHeroImage()
-    {
-
+        Assert.That(home.GetTitle(), Is.EqualTo(home.expectedTitle));
     }
 
     [Test]
-
-    public void VerifyHeroGitHubLink()
+    public void VerifyHero()
     {
+        HomePage home = new(driver);
+        Assert.That(home.GetHeroTitle(), Is.EqualTo(home.expectedHeroTitle));
+
+        //TODO assess email verification
+    }
+
+    [Test]
+    public void VerifyAboutLinkedInLink()
+    {
+        HomePage home = new(driver);
+        home.ClickAboutLinkedInLink();
 
     }
 
-    public void VerifyHeroEmailLink()
+    [Test]
+    public void VerifyAboutEmailLink()
     {
 
     }

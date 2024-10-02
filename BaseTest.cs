@@ -3,6 +3,7 @@ using OpenQA.Selenium.Chrome;
 
 namespace NUnitTest
 {
+    [TestFixture]
     public class BaseTest
     {
 #pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
