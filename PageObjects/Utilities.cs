@@ -40,9 +40,10 @@ public class Utilities
 
         public void ScrollToByElement(By element)
     {
+        WaitForElementToExist(element);
         IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
         js.ExecuteScript("arguments[0].scrollIntoView(true);", driver.FindElement(element));
-
+        WaitForElementToBeVisible(element);
     }
 
     public void ScrollToTop()
@@ -57,12 +58,24 @@ public class Utilities
         js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
     }
 
-    public void WaitForElementVisible(WebElement element)
+    public void WaitForElementToBeVisible(By element)
     {
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-        wait.Until(d => element.Displayed);
+        wait.Until(d => driver.FindElement(element).Displayed);
     }
 
+    public void WaitForElementToExist(By element)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        wait.Until(ExpectedConditions.ElementExists(element));
+    }
+
+    public void WaitForElementToBeClickable(By element)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        wait.Until(ExpectedConditions.ElementToBeClickable(element));        
+    }
+    
     //returns String of broken link names and response codes OR "No broken Links."
     // public String LinksUnbroken(IReadOnlyList<IWebElement> links)
     // {

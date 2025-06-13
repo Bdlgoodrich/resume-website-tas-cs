@@ -21,24 +21,9 @@ namespace NUnitTest
                 //, "--headless=new"
                 ]);
             return driver = new ChromeDriver(chromeOptions);
+
         }
 
-        // [SetUp]
-        // public void Setup()
 
-        // {
-        //     driver = StartDriver();
-
-        //     HomePage home = new(driver);
-        //     home.GoToUrl();
-        // }
-
-        // [TearDown]
-
-        // public void TearDown()
-
-        // {
-        //     driver.Quit();
-        // }
     }
 }

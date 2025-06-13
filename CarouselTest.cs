@@ -3,29 +3,47 @@ using OpenQA.Selenium;
 
 namespace NUnitTest;
 
-public class CarouselTests
+public class CarouselTests: BaseTest
 {
-#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
-    private readonly IWebDriver driver;
-#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
+    private IWebDriver driver;
+    
+    [SetUp]
+    public void Setup()
+    {
+        driver = StartDriver();
+        HomePage home = new(driver);
+        home.GoToUrl();
+        driver.Manage().Window.Maximize();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        driver.Quit();
+    }
 
     [Test]
-    public void VerifyCarousel()
+    public void ShouldContainExpectedItemCount()
     {
         HomePage home = new(driver);
         home.ScrollToCarousel();
+        Assert.That(home.GetCarouselItemCount(), Is.EqualTo(home.expectedCarouselItemCount));
 
+    }
+    
+    [Test]
+    public void ShouldContainExpectedCarouselItemCountPerPage()
+    {
+        HomePage home = new(driver);
+        home.ScrollToCarousel();
         int buttonCount = home.GetButtonCount();
-        int expectedActiveCarouselItems = home.GetExpectedActiveCarouselItemCount();
-        int expectedLastCarouselItemsCount = home.GetExpectedLastCarouselItemCount();
-
-        for(int i = 0; i < buttonCount-1; i++){
-            home.ClickCarouselButton(i);
-             Assert.That(home.GetActiveCarouselItemCount(), Is.EqualTo(expectedActiveCarouselItems));
+        Console.WriteLine("button count is " + buttonCount);
+        for (int i = 0; i < (buttonCount); i++)
+        {
+            home.ClickCarouselButtonByIndex(i);
+            Assert.That(home.GetDisplayedCarouselItemCount(),Is.EqualTo(home.GetExpectedDisplayedCarouselItemCount(buttonCount)));
         }
-        home.ClickCarouselButton(buttonCount);
-        Assert.That(home.GetActiveCarouselItemCount(), Is.EqualTo(expectedLastCarouselItemsCount));
-
+        
     }
 
 }

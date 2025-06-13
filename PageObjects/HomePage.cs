@@ -14,18 +14,18 @@ public class HomePage : Utilities
     public readonly String expectedEmail = "bdlgoodrich@gmail.com";
     public readonly String expectedLinkedInTitle = "Brianna Goodrich | LinkedIn";
     public readonly int expectedCarouselItemCount = 6;
-
-
+    
     //WebElement By locators
     private readonly By heroTitle = By.TagName("h1");
     private readonly By aboutEmailLink = By.Id("aboutEmailLink");
     private readonly By aboutLinkedInLink = By.Id("aboutLinkedInLink");
 
-    private static readonly By carousel = By.Id("code-samples");
-    private readonly By carouselButtons = By.TagName("button");  //requires carousel.FindElement()
+    private readonly By carousel = By.Id("code-projects");
+    private readonly By carouselButtons = By.ClassName("owl-dot");
     private readonly By carouselItems = By.ClassName("owl-item");
-    public readonly By activeItems = By.ClassName("active");  //requires carouselItems.FindElements() OR carouselButtons.FindElement()
-
+    private readonly By activeItems = By.CssSelector(".owl-item.active");
+    private readonly By cloneItems = By.CssSelector(".owl-item.cloned");
+    
     public void GoToUrl()
     {
         driver.Url = url;
@@ -49,6 +49,7 @@ public class HomePage : Utilities
     public void ScrollToCarousel()
     {
         ScrollToByElement(carousel);
+        Thread.Sleep(200);
     }
 
     public void ClickAboutLinkedInLink()
@@ -62,30 +63,44 @@ public class HomePage : Utilities
     {
         return driver.FindElements(carouselButtons).Count;
     }
-    public int GetActiveCarouselItemCount()
+
+    public int GetCarouselItemCount()
     {
-        return carouselItems.FindElements((ISearchContext)activeItems).Count;
+        return (driver.FindElements(carouselItems).Count-driver.FindElements(cloneItems).Count);
     }
-
-    public int GetExpectedActiveCarouselItemCount()
+    
+    public int GetDisplayedCarouselItemCount()
     {
-        return (int)Math.Ceiling((decimal)(expectedCarouselItemCount / GetButtonCount()));
+        int displayedItems = 0;
+        WaitForElementToBeVisible(activeItems);
+        var allActiveItems = driver.FindElements(activeItems);
+
+        foreach (var item in allActiveItems)
+        {
+            try
+            {
+                if (item.Displayed)
+                {
+                    displayedItems++;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        return displayedItems;
     }
 
-    public int GetExpectedLastCarouselItemCount()
+    public int GetExpectedDisplayedCarouselItemCount(int buttonCount)
     {
-        return expectedCarouselItemCount%GetButtonCount();
+        return (int)Math.Ceiling((decimal)expectedCarouselItemCount / buttonCount);
     }
 
-    public IWebElement GetActiveButton()
-    {
-        return carouselButtons.FindElement((ISearchContext)activeItems);
+    public void ClickCarouselButtonByIndex (int index){
+        driver.FindElements(carouselButtons)[index].Click();
+        WaitForElementToBeVisible(activeItems);
     }
-
-    public void ClickCarouselButton (int index){
-        carousel.FindElements((ISearchContext)carouselButtons)[index].Click();
-    }
-
-
-
+    
 }
