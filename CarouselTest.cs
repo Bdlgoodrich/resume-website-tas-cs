@@ -27,7 +27,7 @@ public class CarouselTests: BaseTest
     {
         HomePage home = new(driver);
         home.ScrollToCarousel();
-        Assert.That(home.GetCarouselItemCount(), Is.EqualTo(home.expectedCarouselItemCount));
+        Assert.That(home.GetCarouselItemCount(), Is.EqualTo(home.ExpectedCarouselItemCount));
 
     }
     
@@ -37,7 +37,6 @@ public class CarouselTests: BaseTest
         HomePage home = new(driver);
         home.ScrollToCarousel();
         int buttonCount = home.GetButtonCount();
-        Console.WriteLine("button count is " + buttonCount);
         for (int i = 0; i < (buttonCount); i++)
         {
             home.ClickCarouselButtonByIndex(i);

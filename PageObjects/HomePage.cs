@@ -9,17 +9,21 @@ public class HomePage : Utilities
 
     //Expected website text content
     readonly String url = "https://resume-website-brianna-goodrichs-projects.vercel.app/";
-    public readonly String expectedTitle = "Brianna's Resume";
-    public readonly String expectedHeroTitle = "Brianna Goodrich, aspiring Software Test Automation Engineer";
-    public readonly String expectedEmail = "bdlgoodrich@gmail.com";
-    public readonly String expectedLinkedInTitle = "Brianna Goodrich | LinkedIn";
-    public readonly int expectedCarouselItemCount = 6;
+    public readonly String ExpectedTitle = "Brianna's Resume Website";
+    public readonly String ExpectedHeroTitle = "Brianna Goodrich, Software Quality Assurance Engineer";
+    public readonly String ExpectedEmail = "bdlgoodrich@gmail.com";
+    public readonly String ExpectedGitHubTitle = "Bdlgoodrich · GitHub";
+    public readonly String ExpectedResumeTitle = "Brianna Goodrich Resume";
+    
+    public readonly int ExpectedCarouselItemCount = 6;
     
     //WebElement By locators
     private readonly By heroTitle = By.TagName("h1");
     private readonly By aboutEmailLink = By.Id("aboutEmailLink");
     private readonly By aboutLinkedInLink = By.Id("aboutLinkedInLink");
-
+    private readonly By aboutGitHubLink = By.Id("aboutGitHubLink");
+    private readonly By contactLinkedInLink = By.ClassName("fa-linkedin");
+    
     private readonly By carousel = By.Id("code-projects");
     private readonly By carouselButtons = By.ClassName("owl-dot");
     private readonly By carouselItems = By.ClassName("owl-item");
@@ -40,7 +44,6 @@ public class HomePage : Utilities
         return driver.FindElement(heroTitle).Text;
     }
 
-
     public void ScrollToHero()
     {
         ScrollToByElement(heroTitle);
@@ -57,7 +60,21 @@ public class HomePage : Utilities
         driver.FindElement(aboutLinkedInLink).Click();
     }
 
+    public void ClickAboutGitHubLink()
+    {
+        driver.FindElement(aboutGitHubLink).Click();
+    }
 
+    public void ClickContactLinkedInLink()
+    {
+        driver.FindElement(contactLinkedInLink).Click();
+    }
+
+    public void ClickContactEmailLink()
+    {
+        driver.FindElement(contactLinkedInLink).Click();
+    }
+    
 
     public int GetButtonCount()
     {
@@ -83,19 +100,15 @@ public class HomePage : Utilities
                 {
                     displayedItems++;
                 }
-                
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            catch (Exception e) {}
         }
         return displayedItems;
     }
 
     public int GetExpectedDisplayedCarouselItemCount(int buttonCount)
     {
-        return (int)Math.Ceiling((decimal)expectedCarouselItemCount / buttonCount);
+        return (int)Math.Ceiling((decimal)ExpectedCarouselItemCount / buttonCount);
     }
 
     public void ClickCarouselButtonByIndex (int index){

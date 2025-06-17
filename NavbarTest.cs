@@ -2,25 +2,44 @@ using OpenQA.Selenium;
 
 namespace NUnitTest;
 
-public class NavbarTests
+public class NavbarTests:BaseTest
 {
-#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
-    private readonly IWebDriver driver;
-#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
+    private IWebDriver driver;
 
+    [SetUp]
+    public void Setup()
+    {
+        driver = StartDriver();
+        HomePage home = new(driver);
+        home.GoToUrl();
+        driver.Manage().Window.Maximize();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        driver.Quit();
+    }
+    
     [Test]
-    public void VerifyNavbarAppearance()
+    public void NavbarShouldBeHiddenUponPageLoad()
     {
         HomePage home = new(driver);
         Navbar navbar = new(driver);
-
         Assert.That(navbar.NavbarIsVisible, Is.False);
+    }
+
+    [Test]
+    public void NavbarShouldBeVisibleUponScroll()
+    {
+        HomePage home = new(driver);
+        Navbar navbar = new(driver);
         home.ScrollToHero();
         Assert.That(navbar.NavbarIsVisible, Is.True);
     }
 
     [Test]
-    public void VerifyNavbarNavigations()
+    public void NavbarButtonsShouldScrollToCorrectLocations()
     {
         HomePage home = new(driver);
         Navbar navbar = new(driver);

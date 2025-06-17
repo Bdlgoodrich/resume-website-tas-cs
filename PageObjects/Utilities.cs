@@ -75,6 +75,20 @@ public class Utilities
         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         wait.Until(ExpectedConditions.ElementToBeClickable(element));        
     }
+
+    public void WaitForNewPageToLoad(String title)
+    {
+        WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+        wait.Until(ExpectedConditions.TitleContains(title));
+    }
+
+    public void SwitchToNewWindow(String title)
+    {
+        IList<string> windowHandles = new List<string>(driver.WindowHandles);
+        if (windowHandles.Count > 1) {driver.SwitchTo().Window(windowHandles[1]);}
+        else Assert.Fail("No new window found");
+        WaitForNewPageToLoad(title);
+    }
     
     //returns String of broken link names and response codes OR "No broken Links."
     // public String LinksUnbroken(IReadOnlyList<IWebElement> links)
