@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 
 namespace NUnitTest;
 
-public class NavbarTests:BaseTest
+public class NavbarTests : BaseTest
 {
     private IWebDriver driver;
 
@@ -20,7 +20,7 @@ public class NavbarTests:BaseTest
     {
         driver.Quit();
     }
-    
+
     [Test]
     public void NavbarShouldBeHiddenUponPageLoad()
     {
@@ -38,12 +38,16 @@ public class NavbarTests:BaseTest
         Assert.That(navbar.NavbarIsVisible, Is.True);
     }
 
-    [Test]
-    public void NavbarButtonsShouldScrollToCorrectLocations()
+    public static String[] NavbarButtons = { "Title", "Intro", "AboutMe", "CodeProjects", "FAQ", "Contact" };
+    
+    [TestCaseSource(nameof(NavbarButtons))]
+    public void NavbarButtonsShouldScrollToCorrectLocations(String button)
     {
         HomePage home = new(driver);
         Navbar navbar = new(driver);
-
-        
+        home.ScrollToHero();
+        navbar.ClickNavbarLinkByName(button);
+        Assert.That(navbar.FetchCurrentPosition(),Is.EqualTo(navbar.FetchNavbarLinkExpectedLocation(button)),
+            "The " + button + " Navbar link did not navigate to expected location.");
     }
 }

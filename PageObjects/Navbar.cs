@@ -11,77 +11,33 @@ public class Navbar : Utilities
     
         //WebElement By locators
     private readonly By navbar = By.Id("navBar");    
-    
-    //Navbar locators by hand, also built method to get all navbar links
-    private readonly By navbarTitleLink = By.Id("navbarTitleLink");
-    private readonly By navbarIntroLink = By.Id("navbarIntroLink");
-    private readonly By navbarAboutMeLink = By.Id("navbarAboutMeLink");
-    private readonly By navbarCodeSamplesLink = By.Id("navbarCodeSamplesLink");
-    private readonly By navbarFAQLink = By.Id("navbarFAQLink");
-    private readonly By navbarContactLink = By.Id("navbarContactLink");
     private readonly By navbarResumeLink = By.Id("navbarResumeLink");
-
+    public By ConvertToBy(String name)
+    {
+        return By.Id("navbar" + name + "Link");
+    }
+    
     public Boolean NavbarIsVisible()
     {
         return driver.FindElement(navbar).Displayed;
     }
 
-    public void ClickNavbarTitleLink()
+    public void ClickNavbarLinkByName(String name)
     {
-        driver.FindElement(navbarTitleLink).Click();
+        driver.FindElement(ConvertToBy(name)).Click();
+        Thread.Sleep(1000);
     }
-    public void ClickNavbarIntroLink()
-    {
-        driver.FindElement(navbarIntroLink).Click();
-    }
-    public void ClickNavbarAboutMeLink()
-    {
-        driver.FindElement(navbarAboutMeLink).Click();
-    }
-    public void ClickNavbarCodeSamplesLinkLink()
-    {
-        driver.FindElement(navbarCodeSamplesLink).Click();
-    }
-    public void ClickNavbarFAQLink()
-    {
-        driver.FindElement(navbarFAQLink).Click();
-    }
-    public void ClickNavbarContactLink()
-    {
-        driver.FindElement(navbarContactLink).Click();
-    }
+    
     public void ClickNavbarResumeLink()
     {
         driver.FindElement(navbarResumeLink).Click();
     }
 
-    //alternate to individual navbar locators
-    public IReadOnlyList<IWebElement> FetchNavbarLinks()
+    public double FetchNavbarLinkExpectedLocation(String name)
     {
-        return driver.FindElements(By.CssSelector("a[id*='navbar'], a[id*='Link"));
+        if (name == "Title") return 0;
+        By link = ConvertToBy(name);    
+        return FetchElementPosition(link);
     }
-
-    public List<Double> FetchNavbarLinkScrollExpectedLocations()
-    {
-        IReadOnlyList<IWebElement> navbarLinks = FetchNavbarLinks();
-        List<Double> elementLocations = new(navbarLinks.Count);
-        foreach (IWebElement link in navbarLinks)
-        {
-            ScrollToElement(link);
-            elementLocations.Add(FetchElementPosition(link));
-        }
-        return elementLocations;
-    }
-
-    public List<Double> FetchNavbarLinkScrollLocations()
-    {
-        var navbarLinks = FetchNavbarLinks();
-        List<Double> elementLocations = new(navbarLinks.Count);
-        foreach (WebElement link in navbarLinks.Cast<WebElement>())
-        {
-            link.Click();
-            elementLocations.Add(FetchElementPosition(link));
-        }
-        return elementLocations;
-    }
+    
 }

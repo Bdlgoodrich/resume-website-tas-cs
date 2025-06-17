@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.Interactions;
@@ -13,10 +14,11 @@ public class Utilities
         this.driver = driver;
     }
 
-    public void ActionClick(WebElement element)
+    public void ActionClick(By element)
     {
         ScrollToElement(element);
-        new Actions(driver).MoveToElement(element).Click(element).Build().Perform();
+        IWebElement webElement = driver.FindElement(element);
+        new Actions(driver).MoveToElement(webElement).Click(webElement).Build().Perform();
     }
 
     public void AcceptAlert()
@@ -31,31 +33,26 @@ public class Utilities
         alert.Accept();
     }
 
-    public void ScrollToElement(IWebElement element)
-    {
-        IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-        js.ExecuteScript("arguments[0].scrollIntoView(true);", element);
-
-    }
-
-        public void ScrollToByElement(By element)
+    public void ScrollToElement(By element)
     {
         WaitForElementToExist(element);
         IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
         js.ExecuteScript("arguments[0].scrollIntoView(true);", driver.FindElement(element));
-        WaitForElementToBeVisible(element);
+        Thread.Sleep(1000);
     }
 
     public void ScrollToTop()
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor) driver;
         js.ExecuteScript("window.scrollTop");
+        Thread.Sleep(1000);
     }
 
     public void ScrollToBottom()
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor) driver;
         js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+        Thread.Sleep(1000);
     }
 
     public void WaitForElementToBeVisible(By element)
@@ -113,10 +110,18 @@ public class Utilities
     //     return brokenLinks.ToString();
     // }
 
-    public double FetchElementPosition(IWebElement element)
+    public double FetchElementPosition(By element)
+    {
+        ScrollToElement(element);
+        return FetchCurrentPosition();
+    }
+
+    public double FetchCurrentPosition()
     {
         IJavaScriptExecutor js = (IJavaScriptExecutor) driver;
-        ScrollToElement(element);
-        return (double)js.ExecuteScript("return window.pageYOffset;");
+        string position = js.ExecuteScript("return window.pageYOffset;").ToString();
+        double result = double.Parse(position);
+        return Math.Floor(result);
+        
     }
 }

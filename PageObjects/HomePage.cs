@@ -29,6 +29,7 @@ public class HomePage : Utilities
     private readonly By carouselItems = By.ClassName("owl-item");
     private readonly By activeItems = By.CssSelector(".owl-item.active");
     private readonly By cloneItems = By.CssSelector(".owl-item.cloned");
+
     
     public void GoToUrl()
     {
@@ -46,12 +47,12 @@ public class HomePage : Utilities
 
     public void ScrollToHero()
     {
-        ScrollToByElement(heroTitle);
+        ScrollToElement(heroTitle);
     }
 
     public void ScrollToCarousel()
     {
-        ScrollToByElement(carousel);
+        ScrollToElement(carousel);
         Thread.Sleep(200);
     }
 
@@ -75,7 +76,6 @@ public class HomePage : Utilities
         driver.FindElement(contactLinkedInLink).Click();
     }
     
-
     public int GetButtonCount()
     {
         return driver.FindElements(carouselButtons).Count;
