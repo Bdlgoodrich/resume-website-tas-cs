@@ -1,14 +1,11 @@
-using NUnit.Framework;
+using NUnitTest.PageObjects;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 
-namespace NUnitTest;
+namespace NUnitTest.Tests;
 
-public class BasicTests : BaseTest
+public class FormatTests : BaseTest
 {
-#pragma warning disable NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
-    private IWebDriver driver;
-#pragma warning restore NUnit1032 // An IDisposable field/property should be Disposed in a TearDown method
+    private new IWebDriver driver;
 
     [SetUp]
     public void Setup()
@@ -37,25 +34,25 @@ public class BasicTests : BaseTest
         HomePage home = new(driver);
         Assert.That(home.GetHeroTitle(), Is.EqualTo(home.ExpectedHeroTitle));
     }
-    
+
     [Test]
     public void AboutLinkedInLinkShouldOpenNewTabWithLinkedIn()
     {
         HomePage home = new(driver);
         home.ClickAboutLinkedInLink();
         home.SwitchToNewWindow("LinkedIn");
-        Assert.That(driver.Title,Contains.Substring("LinkedIn"));
+        Assert.That(driver.Title, Contains.Substring("LinkedIn"));
     }
-    
+
     [Test]
     public void AboutGitHubLinkShouldOpenNewTabWithGitHub()
     {
         HomePage home = new(driver);
         home.ClickAboutGitHubLink();
         home.SwitchToNewWindow(home.ExpectedGitHubTitle);
-        Assert.That(driver.Title,Is.EqualTo(home.ExpectedGitHubTitle));
+        Assert.That(driver.Title, Is.EqualTo(home.ExpectedGitHubTitle));
     }
-    
+
     [Test]
     public void ContactLinkedInLinkShouldOpenNewTabWithLinkedIn()
     {
@@ -67,7 +64,7 @@ public class BasicTests : BaseTest
 
     //TODO assess email verification
     [Test]
-    public void ContactEmilLinkShouldOpenEmailDialogBox ()
+    public void ContactEmilLinkShouldOpenEmailDialogBox()
     {
         HomePage home = new(driver);
         home.ClickContactEmailLink();

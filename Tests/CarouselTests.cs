@@ -1,12 +1,12 @@
-using System.Runtime.ConstrainedExecution;
+using NUnitTest.PageObjects;
 using OpenQA.Selenium;
 
-namespace NUnitTest;
+namespace NUnitTest.Tests;
 
-public class CarouselTests: BaseTest
+public class CarouselTests : BaseTest
 {
-    private IWebDriver driver;
-    
+    private new IWebDriver driver;
+
     [SetUp]
     public void Setup()
     {
@@ -28,9 +28,8 @@ public class CarouselTests: BaseTest
         HomePage home = new(driver);
         home.ScrollToCarousel();
         Assert.That(home.GetCarouselItemCount(), Is.EqualTo(home.ExpectedCarouselItemCount));
-
     }
-    
+
     [Test]
     public void ShouldContainExpectedCarouselItemCountPerPage()
     {
@@ -40,9 +39,8 @@ public class CarouselTests: BaseTest
         for (int i = 0; i < (buttonCount); i++)
         {
             home.ClickCarouselButtonByIndex(i);
-            Assert.That(home.GetDisplayedCarouselItemCount(),Is.EqualTo(home.GetExpectedDisplayedCarouselItemCount(buttonCount)));
+            Assert.That(home.GetDisplayedCarouselItemCount(),
+                Is.EqualTo(home.GetExpectedDisplayedCarouselItemCount(buttonCount)));
         }
-        
     }
-
 }

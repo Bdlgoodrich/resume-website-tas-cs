@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
 
+namespace NUnitTest.PageObjects;
+
 public class HomePage : Utilities
 {
     public HomePage(IWebDriver driver) : base(driver)
@@ -8,12 +10,12 @@ public class HomePage : Utilities
     }
 
     //Expected website text content
-    readonly String url = "https://resume-website-brianna-goodrichs-projects.vercel.app/";
-    public readonly String ExpectedTitle = "Brianna's Resume Website";
-    public readonly String ExpectedHeroTitle = "Brianna Goodrich, Software Quality Assurance Engineer";
-    public readonly String ExpectedEmail = "bdlgoodrich@gmail.com";
-    public readonly String ExpectedGitHubTitle = "Bdlgoodrich · GitHub";
-    public readonly String ExpectedResumeTitle = "Brianna Goodrich Resume";
+    private readonly string url = "https://resume-website-brianna-goodrichs-projects.vercel.app/";
+    public readonly string ExpectedTitle = "Brianna's Resume Website";
+    public readonly string ExpectedHeroTitle = "Brianna Goodrich, Software Quality Assurance Engineer";
+    public readonly string ExpectedEmail = "bdlgoodrich@gmail.com";
+    public readonly string ExpectedGitHubTitle = "Bdlgoodrich · GitHub";
+    public readonly string ExpectedResumeTitle = "Brianna Goodrich Resume";
     
     public readonly int ExpectedCarouselItemCount = 6;
     
@@ -29,6 +31,9 @@ public class HomePage : Utilities
     private readonly By carouselItems = By.ClassName("owl-item");
     private readonly By activeItems = By.CssSelector(".owl-item.active");
     private readonly By cloneItems = By.CssSelector(".owl-item.cloned");
+    
+    private readonly By dropdown = By.Id("FAQ");
+    private readonly By dropdownItems = By.CssSelector(".owl-item.dropdown");
 
     
     public void GoToUrl()
@@ -36,11 +41,11 @@ public class HomePage : Utilities
         driver.Url = url;
     }
 
-    public String GetTitle()
+    public string GetTitle()
     {
         return driver.Title;
     }
-    public String GetHeroTitle()
+    public string GetHeroTitle()
     {
         return driver.FindElement(heroTitle).Text;
     }
@@ -54,6 +59,11 @@ public class HomePage : Utilities
     {
         ScrollToElement(carousel);
         Thread.Sleep(200);
+    }
+
+    public void ScrollToDropdown()
+    {
+        ScrollToElement(dropdown);
     }
 
     public void ClickAboutLinkedInLink()
@@ -101,7 +111,10 @@ public class HomePage : Utilities
                     displayedItems++;
                 }
             }
-            catch (Exception e) {}
+            catch (Exception e)
+            {
+                // ignored
+            }
         }
         return displayedItems;
     }
@@ -115,5 +128,20 @@ public class HomePage : Utilities
         driver.FindElements(carouselButtons)[index].Click();
         WaitForElementToBeVisible(activeItems);
     }
-    
+
+    public int GetDropdownCount()
+    {
+        return driver.FindElements(By.ClassName("collapse")).Count;
+    }
+    public bool DropdownIsOpen(int number)
+    {
+        //id = "collapse"+number, contains className = "show"
+        var element = driver.FindElement(By.Id("collapse" + number));
+        return element.GetAttribute("class").Contains("show");
+    }
+
+    public bool AllDropdownsAreClosed()
+    {
+        return driver.FindElements(By.ClassName("show")).Count == 0;
+    }
 }
